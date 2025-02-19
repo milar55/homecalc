@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Affordability Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Home Affordability Calculator</h1>
+        <div class="calculator">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="income">Annual Income ($):</label>
+                    <input type="number" id="income" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="downpaymentPercentage">Down Payment (% of Home Price):</label>
+                    <input type="range" id="downpaymentPercentage" min="0" max="100" step="1" value="20" oninput="updateDownpaymentValue(this.value)">
+                    <span id="downpaymentValue">20%</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="interestRate">Interest Rate (%):</label>
+                    <input type="range" id="interestRate" min="0" max="10" step="0.1" value="7" oninput="updateInterestRateValue(this.value)">
+                    <span id="interestRateValue">7%</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="loanTerm">Loan Term:</label>
+                    <select id="loanTerm" onchange="updateLoanTerm()">
+                        <option value="10">10 years</option>
+                        <option value="30" selected>30 years</option>
+                    </select>
+                </div>
+
+                <div class="input-group edit-row">
+                    <div>
+                        <label for="taxRate">Annual Property Tax Rate (%):</label>
+                        <input type="number" id="taxRate" value="1.2" step="0.1" required readonly ondblclick="makeEditable(this)">
+                    </div>
+                    <div>
+                        <label for="hoaFees">Monthly HOA Fees ($):</label>
+                        <input type="number" id="hoaFees" value="500" required readonly ondblclick="makeEditable(this)">
+                    </div>
+                    <div>
+                        <label for="pmi">Annual PMI ($):</label>
+                        <input type="number" id="pmi" value="1000" required readonly ondblclick="makeEditable(this)">
+                    </div>
+                </div>
+
+                <button onclick="calculateAffordability()">Calculate</button>
+            </div>
+
+            <div class="output-section">
+                <div class="results" id="results">
+                    <h3>Results</h3>
+                    <div class="result-item">
+                        <span class="result-label">Maximum Home Price:</span>
+                        <span class="result-value" id="maxPrice">$0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Estimated Monthly Payment:</span>
+                        <span class="result-value" id="monthlyPayment">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
